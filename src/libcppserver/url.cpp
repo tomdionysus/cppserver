@@ -65,7 +65,12 @@ void URL::parse(const std::string& url) {
         port = static_cast<uint16_t>(_port);
       }
 
-      path = matches[6].matched ? std::string(matches[6]) : "/";
+      if (matches[6].matched) {
+        path = matches[6];
+      } else {
+        path = "/";  // Set default path as "/"
+      }
+
       query = matches[7];
       fragment = matches[8];
 

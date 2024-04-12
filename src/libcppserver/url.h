@@ -54,6 +54,9 @@ class URL {
  private:
   bool _valid{false};
 
+  bool isDefaultPort() const;
+  std::string toLower(const std::string& input) const;
+
   static const std::map<std::string, uint16_t> defaultPorts;
 };
 
