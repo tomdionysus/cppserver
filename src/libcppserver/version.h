@@ -30,14 +30,13 @@ class Version {
  public:
   Version(uint8_t* ptr, size_t len);
   Version(const std::string& version);
-  Version(uint8_t major, uint8_t minor, uint8_t patch);
+  Version(uint8_t pmajor, uint8_t pminor, uint8_t ppatch);
 
   size_t pack(uint8_t* ptr);
   std::string to_string();
 
   friend std::ostream& operator<<(std::ostream& os, const Version& v);
 
- private:
   uint8_t major;
   uint8_t minor;
   uint8_t patch;
