@@ -29,30 +29,30 @@ namespace cppserver {
 
 LoggerStdIO::LoggerStdIO(LogLevel log_level) { _log_level = log_level; }
 
-void LoggerStdIO::debug(std::string log) {
+void LoggerStdIO::debug(const std::string &log) {
   if (_log_level > LogLevel::DEBUG) return;
   std::lock_guard<std::mutex> lock(mtx);
   std::cout << _getDateTime() << " [DEBUG] " << log << std::endl;
 }
 
-void LoggerStdIO::info(std::string log) {
+void LoggerStdIO::info(const std::string &log) {
   if (_log_level > LogLevel::INFO) return;
   std::lock_guard<std::mutex> lock(mtx);
   std::cout << _getDateTime() << " [INFO ] " << log << std::endl;
 }
 
-void LoggerStdIO::warn(std::string log) {
+void LoggerStdIO::warn(const std::string &log) {
   if (_log_level > LogLevel::WARN) return;
   std::lock_guard<std::mutex> lock(mtx);
   std::cout << _getDateTime() << " [WARN ] " << log << std::endl;
 }
 
-void LoggerStdIO::error(std::string log) {
+void LoggerStdIO::error(const std::string &log) {
   std::lock_guard<std::mutex> lock(mtx);
   std::cout << _getDateTime() << " [ERROR] " << log << std::endl;
 }
 
-std::string LoggerStdIO::_getDateTime() {
+const std::string LoggerStdIO::_getDateTime() {
   auto now = std::chrono::system_clock::now();
   auto now_c = std::chrono::system_clock::to_time_t(now);
   std::tm now_tm = *std::gmtime(&now_c);

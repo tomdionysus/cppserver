@@ -36,7 +36,13 @@ DeviceDBMySQL::DeviceDBMySQL(std::shared_ptr<Logger> logger, URL& dbUrl) : _dbUr
 DeviceDBMySQL::~DeviceDBMySQL() { close(); }
 
 bool DeviceDBMySQL::initialise() {
+  if (!_dbUrl.is_valid()) {
+    _logger->error("dbUrl is not valid.");
+    return false;
+  }
+
   conn = mysql_init(nullptr);
+
   if (!conn) {
     _logger->error("MySQL initialization failed.");
     return false;
@@ -44,6 +50,7 @@ bool DeviceDBMySQL::initialise() {
 
   const char* user = nullptr;
   const char* password = nullptr;
+  const char* database = _dbUrl.path.length() > 1 ? _dbUrl.path.substr(1).c_str() : nullptr;
   uint16_t port = 0;
 
   if (_dbUrl.user) user = _dbUrl.user.value().c_str();
@@ -52,7 +59,7 @@ bool DeviceDBMySQL::initialise() {
 
   _logger->debug("connecting...");
 
-  if (!mysql_real_connect(conn, _dbUrl.host.c_str(), user, password, _dbUrl.path.substr(1).c_str(), port, nullptr, 0)) {
+  if (!mysql_real_connect(conn, _dbUrl.host.c_str(), user, password, database, port, nullptr, 0)) {
     _logger->error("Connection failed: " + std::string(mysql_error(conn)));
     return false;
   }

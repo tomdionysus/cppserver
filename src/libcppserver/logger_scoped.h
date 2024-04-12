@@ -30,10 +30,10 @@ class LoggerScoped : public Logger {
  public:
   LoggerScoped(std::string scope, std::shared_ptr<Logger> logger);
 
-  virtual void debug(std::string log);
-  virtual void info(std::string log);
-  virtual void warn(std::string log);
-  virtual void error(std::string log);
+  virtual void debug(const std::string &log);
+  virtual void info(const std::string &log);
+  virtual void warn(const std::string &log);
+  virtual void error(const std::string &log);
 
  private:
   std::string _scope;

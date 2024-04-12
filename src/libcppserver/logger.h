@@ -29,10 +29,10 @@ enum LogLevel { DEBUG = 0, INFO = 1, WARN = 2, ERROR = 3 };
 class Logger {
  public:
   virtual ~Logger() {}
-  virtual void debug(std::string log) = 0;
-  virtual void info(std::string log) = 0;
-  virtual void warn(std::string log) = 0;
-  virtual void error(std::string log) = 0;
+  virtual void debug(const std::string &log) = 0;
+  virtual void info(const std::string &log) = 0;
+  virtual void warn(const std::string &log) = 0;
+  virtual void error(const std::string &log) = 0;
 };
 
 }  // namespace cppserver

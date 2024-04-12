@@ -31,14 +31,14 @@ class LoggerStdIO : public Logger {
  public:
   LoggerStdIO(LogLevel log_level);
 
-  virtual void debug(std::string log);
-  virtual void info(std::string log);
-  virtual void warn(std::string log);
-  virtual void error(std::string log);
+  virtual void debug(const std::string &log);
+  virtual void info(const std::string &log);
+  virtual void warn(const std::string &log);
+  virtual void error(const std::string &log);
 
  private:
   LogLevel _log_level;
-  std::string _getDateTime();
+  const std::string _getDateTime();
   std::mutex mtx;
 };
 

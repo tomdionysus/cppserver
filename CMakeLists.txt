@@ -24,7 +24,7 @@ if(NOT boost_POPULATED)
   set(BOOST_ROOT ${boost_SOURCE_DIR})
 endif()
 
-# Fetch Google Test
+# Fetch Google Test and Google Mock
 FetchContent_Declare(
   googletest
   GIT_REPOSITORY https://github.com/google/googletest.git
@@ -53,7 +53,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/src/libcppserver
     ${CMAKE_SOURCE_DIR}/src/cppserverd
-    ${MYSQL_INCLUDE_DIR} # Include MySQL directories
+    ${MYSQL_INCLUDE_DIR}
     ${Boost_INCLUDE_DIRS}
 )
 
@@ -82,7 +82,7 @@ install(TARGETS cppserverd DESTINATION bin)
 
 # Test executable
 add_executable(cppserver_tests ${cppserver_test_SOURCES})
-target_link_libraries(cppserver_tests gtest_main cppserver)
+target_link_libraries(cppserver_tests gmock_main cppserver)
 
 include(GoogleTest)
 gtest_discover_tests(cppserver_tests)

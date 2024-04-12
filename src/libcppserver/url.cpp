@@ -21,6 +21,7 @@
 #include "url.h"
 
 #include <limits>
+#include <string>
 
 namespace cppserver {
 
@@ -64,7 +65,7 @@ void URL::parse(const std::string& url) {
         port = static_cast<uint16_t>(_port);
       }
 
-      path = matches[6];
+      path = matches[6].matched ? std::string(matches[6]) : "/";
       query = matches[7];
       fragment = matches[8];
 
